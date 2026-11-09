@@ -14,16 +14,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <style>
       :root{
-        --bg:#F4F3F2;
+        --bg:#F5F5F5;
         --ink:#0F1011;
         --card:#FFFFFF;
-        --line:#E4E2DE;
-        --gray:#707070;
-        --gray-2:#B6B6B6;
-        --band:#ECEBE9;
-        --warm:#E9E7E2;
-        --dark:#0F1011;
-        --dark-2:#17181A;
+        --line:#E6E6E6;
+        --gray:#8A8A8A;
+        --gray-2:#A8A8A8;
+        --band:#EDEDED;
+        --warm:#EFEFEF;
+        --dark:#151718;
+        --dark-2:#1C1D1F;
+        --accent:#FF4D00;
         --dark-line:rgba(255,255,255,.16);
         --green:#22C55E;
         --disp:"Switzer","Inter",system-ui,sans-serif;
@@ -59,7 +60,7 @@
         color:var(--gray);display:flex;align-items:center;gap:10px;margin-bottom:20px;
       }
       .eyebrow::before{content:"";width:26px;height:1px;background:var(--gray-2);flex:none}
-      .eyebrow .cnt{color:var(--gray-2);letter-spacing:.08em}
+      .eyebrow .cnt{color:var(--accent);letter-spacing:.08em;font-weight:600}
       .sec-title{font-size:clamp(2.3rem,4.6vw,3.7rem);font-weight:500}
       .sec-sub{color:var(--gray);line-height:1.7;max-width:540px;margin-top:16px;font-size:1rem}
 
@@ -227,7 +228,7 @@
         display:block;background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;
         transition:box-shadow .4s,transform .4s var(--ease),border-color .4s;
       }
-      .wcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px);border-color:#D8D5D0}
+      .wcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px);border-color:#DCDCDC}
       .cover{position:relative;overflow:hidden;aspect-ratio:16/8.6}
       .cover-in{
         position:absolute;inset:0;padding:clamp(22px,4vw,44px);
@@ -251,7 +252,7 @@
       .cover-light .top,.cover-light .bot{color:var(--gray)}
       .cover-white{background:#fff;color:var(--ink)}
       .cover-white .top,.cover-white .bot{color:var(--gray)}
-      .cover-dark{background:linear-gradient(140deg,#1B1C1F,#0F1011 70%);color:#fff}
+      .cover-dark{background:linear-gradient(140deg,#1C1D1F,#151718 70%);color:#fff}
       .cover-dark .top,.cover-dark .bot{color:var(--gray-2)}
       .see-pill{
         position:absolute;left:22px;bottom:20px;z-index:3;background:#fff;color:var(--ink);
@@ -292,7 +293,11 @@
       }
       .svc-row:first-of-type{border-top:1px dotted rgba(255,255,255,.26)}
       .svc-row:hover{background:rgba(255,255,255,.03);padding-left:14px}
-      .svc-row .num{font-family:var(--mono);font-size:.8rem;color:var(--gray-2);letter-spacing:.1em}
+      .svc-row .num{
+        font-family:var(--mono);font-size:.78rem;font-weight:600;color:var(--accent);letter-spacing:.04em;
+        width:48px;height:48px;flex:none;border:1.5px solid var(--accent);border-radius:50%;
+        display:inline-flex;align-items:center;justify-content:center;justify-self:start;line-height:1;
+      }
       .svc-row h3{font-size:clamp(1.35rem,2.6vw,1.9rem);font-weight:500;color:#fff}
       .svc-row .desc{color:var(--gray-2);line-height:1.65;font-size:.94rem;margin-top:7px;max-width:560px}
       .svc-tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
@@ -320,7 +325,7 @@
       .bar-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
       .bar-head .name{font-weight:600;font-size:.97rem}
       .bar-head .pct{font-family:var(--mono);font-size:.86rem;color:var(--gray)}
-      .track{height:8px;border-radius:99px;background:#E7E5E1;overflow:hidden}
+      .track{height:8px;border-radius:99px;background:#E9E9E9;overflow:hidden}
       .fill{height:100%;width:0;border-radius:99px;background:var(--ink);transition:width 1.5s cubic-bezier(.22,.8,.3,1)}
 
       /* ---------- FAQ ---------- */
@@ -365,7 +370,7 @@
       form.dark-form .full{grid-column:1/-1}
       form.dark-form label{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-2);display:block;margin-bottom:8px}
       form.dark-form input,form.dark-form textarea{
-        width:100%;background:#101112;border:1px solid var(--dark-line);border-radius:12px;
+        width:100%;background:#151718;border:1px solid var(--dark-line);border-radius:12px;
         padding:13px 15px;color:#fff;font-family:inherit;font-size:.93rem;outline:none;
         transition:border-color .25s,box-shadow .25s;
       }
@@ -389,7 +394,13 @@
         font-family:var(--disp);font-weight:700;text-transform:uppercase;text-align:center;
         font-size:clamp(3rem,12.6vw,12.8rem);line-height:.86;letter-spacing:-.015em;color:var(--ink);
         white-space:nowrap;user-select:none;padding-top:8px;
+        background:linear-gradient(100deg,var(--ink) 0%,var(--ink) 38%,#BDBDBD 50%,var(--ink) 62%,var(--ink) 100%);
+        background-size:220% 100%;
+        -webkit-background-clip:text;background-clip:text;
+        -webkit-text-fill-color:transparent;color:transparent;
+        animation:giantShine 7s linear infinite;
       }
+      @keyframes giantShine{from{background-position:180% 0}to{background-position:-80% 0}}
       .foot-bar{border-top:1px solid var(--line);padding:18px 0 22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       .foot-bar span{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray)}
 
@@ -438,6 +449,48 @@
       }
       @keyframes caretBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
       .type-caret.done{opacity:0}
+
+      /* ---------- parallel motion layer (Cosmos-style, additive) ----------
+         Everything below runs IN PARALLEL with the existing loops
+         (brands marquee, floating chips, pulsing dot, rotating words,
+         reveals). Parallax is applied by the script at the end of the
+         body through the standalone `translate` property, which
+         composes with — and never overwrites — `transform`, so it
+         cannot fight the reveal transforms or the chips' floaty
+         keyframes. Ken Burns uses the standalone `scale` property for
+         the same reason: the cover's hover transform still works. */
+
+      /* second marquee — outline text, reverse direction, slower */
+      .marquee2{overflow:hidden;padding:30px 0 36px;border-bottom:1px solid var(--line)}
+      .mq2-track{display:flex;width:max-content;animation:scrollXRev 42s linear infinite}
+      .mq2-group{display:flex;align-items:center;flex:none}
+      .mq2-group span{
+        font-family:var(--disp);font-weight:700;text-transform:uppercase;white-space:nowrap;
+        font-size:clamp(2.4rem,6.2vw,4.6rem);letter-spacing:.01em;line-height:1.05;padding:0 18px;
+        color:transparent;-webkit-text-stroke:1.5px var(--ink);
+      }
+      .mq2-group i{font-style:normal;font-size:clamp(1.1rem,2.6vw,1.9rem);color:var(--accent);flex:none;line-height:1}
+      @keyframes scrollXRev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+      /* slow zoom (Ken Burns) on project covers — per-card offsets below
+         keep the eight covers out of sync with each other */
+      .cover-in{animation:kenBurns 8s ease-in-out infinite alternate;will-change:scale}
+      @keyframes kenBurns{from{scale:1}to{scale:1.06}}
+      .work:nth-of-type(1) .cover-in{animation-duration:8s;animation-delay:-1.2s}
+      .work:nth-of-type(2) .cover-in{animation-duration:9s;animation-delay:-4.5s}
+      .work:nth-of-type(3) .cover-in{animation-duration:7.6s;animation-delay:-2.8s}
+      .work:nth-of-type(4) .cover-in{animation-duration:8.8s;animation-delay:-6.1s}
+      .work:nth-of-type(5) .cover-in{animation-duration:8.4s;animation-delay:-3.4s}
+      .work:nth-of-type(6) .cover-in{animation-duration:9.4s;animation-delay:-5.2s}
+      .work:nth-of-type(7) .cover-in{animation-duration:7.8s;animation-delay:-.6s}
+      .work:nth-of-type(8) .cover-in{animation-duration:8.6s;animation-delay:-7s}
+
+      /* parallax targets get their own compositor layer */
+      .photo-card,.photo-chip,.eyebrow{will-change:translate}
+      @media (max-width:640px){
+        .svc-row .num{width:40px;height:40px;font-size:.7rem}
+        .mq2-group span{-webkit-text-stroke-width:1.2px}
+      }
 
       /* ---------- responsive ---------- */
       @media (max-width:1120px){
@@ -770,6 +823,18 @@
       </div>
     </section>
 
+    <!-- ================= SECOND MARQUEE (reverse, outline) ================= -->
+    <div class="marquee2" aria-hidden="true">
+      <div class="mq2-track">
+        <div class="mq2-group">
+          <span>Web Development</span><i>•</i><span>UI Design</span><i>•</i><span>AI Tools</span><i>•</i><span>Telegram Bots</span><i>•</i><span>Web Development</span><i>•</i><span>UI Design</span><i>•</i><span>AI Tools</span><i>•</i><span>Telegram Bots</span><i>•</i>
+        </div>
+        <div class="mq2-group">
+          <span>Web Development</span><i>•</i><span>UI Design</span><i>•</i><span>AI Tools</span><i>•</i><span>Telegram Bots</span><i>•</i><span>Web Development</span><i>•</i><span>UI Design</span><i>•</i><span>AI Tools</span><i>•</i><span>Telegram Bots</span><i>•</i>
+        </div>
+      </div>
+    </div>
+
     <!-- ================= SERVICES (dark inset) ================= -->
     <div class="dark-sec" id="services">
       <div class="wrap-wide">
@@ -783,7 +848,7 @@
           </div>
 
           <div class="svc-row reveal-right">
-            <span class="num">( 01 )</span>
+            <span class="num">01</span>
             <div>
               <h3>Web Development</h3>
               <p class="desc">Building fast, responsive and scalable web applications with modern technologies.</p>
@@ -791,7 +856,7 @@
             <div class="svc-tags"><span class="stag">React</span><span class="stag">Next.js</span><span class="stag">JavaScript</span></div>
           </div>
           <div class="svc-row reveal-right">
-            <span class="num">( 02 )</span>
+            <span class="num">02</span>
             <div>
               <h3>Responsive Design</h3>
               <p class="desc">Crafting beautiful, mobile-first designs that deliver a seamless experience everywhere.</p>
@@ -799,7 +864,7 @@
             <div class="svc-tags"><span class="stag">Mobile-First</span><span class="stag">UI Design</span></div>
           </div>
           <div class="svc-row reveal-right">
-            <span class="num">( 03 )</span>
+            <span class="num">03</span>
             <div>
               <h3>Performance &amp; SEO Optimization</h3>
               <p class="desc">Improving speed, SEO and overall performance to ensure the best user experience.</p>
@@ -807,7 +872,7 @@
             <div class="svc-tags"><span class="stag">Speed</span><span class="stag">SEO</span><span class="stag">Core Web Vitals</span></div>
           </div>
           <div class="svc-row reveal-right">
-            <span class="num">( 04 )</span>
+            <span class="num">04</span>
             <div>
               <h3>Backend &amp; APIs</h3>
               <p class="desc">Developing secure, reliable and scalable APIs and backend services.</p>
@@ -1324,6 +1389,72 @@
           var r = phrase.getBoundingClientRect();
           if (r.top < window.innerHeight && r.bottom > 0) startTyping();
         }, 1400);
+      })();
+    </script>
+    <script>
+      /* ---------- Parallax layer (additive — runs in parallel) ----------
+         rAF-driven, transform-only motion via the standalone `translate`
+         property, which composes with `transform` instead of replacing
+         it: the reveal system, the chips' floaty keyframes and the
+         photo card layout are never touched. Targets ease (lerp) toward
+         their scroll-derived offsets every frame — no jumps, no jitter.
+           - hero photo card drifts at ~0.92x page speed
+           - hero chip A at ~0.85x, chip B at ~1.08x (different depths)
+           - section eyebrows shift a few px horizontally as their
+             section crosses the viewport (eyebrows that carry a reveal
+             class themselves are skipped — their parent reveal already
+             moves them, and this layer must never fight it)
+         The loop sleeps while the tab is hidden. */
+      (function () {
+        var card = document.querySelector(".photo-card");
+        var chipA = document.querySelector(".chip-a");
+        var chipB = document.querySelector(".chip-b");
+        var eyebrows = Array.prototype.slice.call(
+          document.querySelectorAll(".eyebrow:not(.reveal):not(.reveal-left):not(.reveal-right)")
+        );
+        if (!card && !chipA && !chipB && !eyebrows.length) return;
+
+        function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
+
+        var heroItems = [];
+        if (card) heroItems.push({ el: card, f: 0.08, cur: 0 });   /* 1 - 0.92 */
+        if (chipA) heroItems.push({ el: chipA, f: 0.15, cur: 0 }); /* 1 - 0.85 */
+        if (chipB) heroItems.push({ el: chipB, f: -0.08, cur: 0 });/* 1 - 1.08 */
+        var browItems = eyebrows.map(function (el) { return { el: el, cur: 0 }; });
+
+        var rafId = null;
+        function frame() {
+          var y = window.scrollY || window.pageYOffset;
+          var vh = window.innerHeight || 800;
+
+          /* hero depth drift — only while the hero is on/near screen */
+          if (y < vh * 1.4) {
+            heroItems.forEach(function (it) {
+              var target = clamp(y * it.f, -24, 24);
+              it.cur += (target - it.cur) * 0.08;
+              if (Math.abs(it.cur) > 0.05) it.el.style.translate = "0px " + it.cur.toFixed(2) + "px";
+              else if (it.el.style.translate) it.el.style.translate = "";
+            });
+          }
+
+          /* eyebrow horizontal drift as sections cross the viewport */
+          browItems.forEach(function (it) {
+            var r = it.el.getBoundingClientRect();
+            if (r.bottom < -80 || r.top > vh + 80) return;
+            var progress = (r.top + r.height / 2 - vh / 2) / vh; /* ~-0.5 .. 0.5 */
+            var target = clamp(progress * -22, -11, 11);
+            it.cur += (target - it.cur) * 0.08;
+            it.el.style.translate = it.cur.toFixed(2) + "px 0px";
+          });
+
+          rafId = requestAnimationFrame(frame);
+        }
+        function start() { if (rafId === null) rafId = requestAnimationFrame(frame); }
+        function stop() { if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } }
+        document.addEventListener("visibilitychange", function () {
+          if (document.hidden) stop(); else start();
+        });
+        start();
       })();
     </script>
   </body>
