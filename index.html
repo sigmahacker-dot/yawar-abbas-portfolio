@@ -231,6 +231,17 @@
       .stack{margin-top:10px}
       .wunit{position:sticky;top:110px;margin-top:2vh}
       .stack .wunit:first-child{margin-top:1vh}
+      /* each unit is its own stacking layer, rising in z-index, so an
+         incoming unit (panel AND its gutter labels) paints fully over
+         the pinned unit beneath it — see .gutter below */
+      .stack .wunit:nth-child(1){z-index:1}
+      .stack .wunit:nth-child(3){z-index:2}
+      .stack .wunit:nth-child(5){z-index:3}
+      .stack .wunit:nth-child(7){z-index:4}
+      .stack .wunit:nth-child(9){z-index:5}
+      .stack .wunit:nth-child(11){z-index:6}
+      .stack .wunit:nth-child(13){z-index:7}
+      .stack .wunit:nth-child(15){z-index:8}
       .work-meta{
         display:flex;justify-content:space-between;gap:16px;margin-bottom:14px;
         font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);
@@ -257,17 +268,17 @@
       .panel-pill svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex:none}
       .cover-in{
         position:absolute;inset:0;padding:clamp(22px,4vw,44px);
-        display:flex;flex-direction:column;justify-content:space-between;
+        display:flex;flex-direction:column;justify-content:space-between;gap:16px;
       }
       .cover-in .top{display:flex;justify-content:space-between;align-items:flex-start;font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase}
       .cover-in .word{
-        font-family:var(--disp);font-weight:700;text-transform:uppercase;line-height:.95;
-        font-size:clamp(2.4rem,6.4vw,4.9rem);letter-spacing:-.02em;
+        font-family:var(--disp);font-weight:700;text-transform:uppercase;line-height:.98;
+        font-size:clamp(2.3rem,5.8vw,4.4rem);letter-spacing:-.02em;margin:10px 0;
         /* safe zone: the big word never runs edge-to-edge, so the
            panel's object-cover crop can never slice it */
         max-width:88%;align-self:center;text-align:center;
       }
-      .cover-in .bot{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;display:flex;justify-content:space-between;gap:12px}
+      .cover-in .bot{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;row-gap:6px}
       .cover-light{background:var(--warm);color:var(--ink)}
       .cover-light .top,.cover-light .bot{color:var(--gray)}
       .cover-white{background:#fff;color:var(--ink)}
@@ -278,7 +289,8 @@
       @media (min-width:1380px){
         .work-meta{display:none}
         .gutter{
-          display:block;position:absolute;top:40%;z-index:2;width:104px;
+          display:block;position:absolute;top:40%;z-index:3;width:104px;min-height:76px;
+          background:var(--bg);padding:10px 12px;border-radius:10px;
           font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);line-height:1.55;
         }
         .gutter b{display:block;font-family:var(--body);font-size:.95rem;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);margin-top:3px}
@@ -296,7 +308,7 @@
         .wbody{padding-top:12px}
         .wbody p{line-height:1.58}
       }
-      .wbody{padding:18px 4px 0;position:relative;background:var(--bg)}
+      .wbody{padding:20px 18px 22px;position:relative;z-index:20;background:#FFFFFF;opacity:1;border:1px solid var(--line);border-radius:14px}
       .wbody h3{font-size:1.45rem;font-weight:600;display:inline}
       .wbody .ttl{
         background-image:linear-gradient(currentColor,currentColor);background-size:0% 2px;
@@ -322,15 +334,20 @@
         padding:clamp(52px,7vw,92px) clamp(22px,5vw,76px);
       }
       .dark-box.clip{overflow:clip}
-      .dark-box .eyebrow{color:var(--gray-2)}
-      .dark-box .eyebrow::before{background:#3A3B3E}
+      .dark-box .eyebrow{color:#D9D9D9}
+      .dark-box .eyebrow::before{background:#5A5B5E}
       .dark-sec{padding:26px 0}
 
       /* services — Cosmos sticky stacking cards (pure CSS position:sticky)
-         Structured exactly like the Works stack: head, pin row and the
-         four cards are direct siblings inside one tall container (the
-         .dark-box, which carries NO overflow value — see above), with
-         no wrapper in between. The section head scrolls normally; the
+         Structured exactly like the Works stack: the section head sits
+         outside, and the pin row plus the four cards are direct block
+         siblings inside one plain block container (.svc-stack) inside
+         the .dark-box, which carries NO overflow value — see above.
+         Cards are display:block (never flex — a flex-column sticky card
+         is the one structural delta from the working Works units, whose
+         sticky elements are plain blocks; in the engine that failed
+         live the flex cards never pinned while the block Works units
+         and this row did). The section head scrolls normally; the
          slim label row then pins at top:92px with the highest z-index.
          Each .svc-card is position:sticky at top:150px (140px on
          mobile) with an opaque #000 background and a z-index that
@@ -347,22 +364,25 @@
         font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-2);
       }
       .svc-pinrow .cnt{color:var(--accent);font-weight:600;letter-spacing:.08em}
+      .svc-stack{display:block;margin-top:2px}
       .svc-card{
         position:sticky;top:150px;background:#000;min-height:300px;
         border-bottom:1px dotted rgba(255,255,255,.26);
-        padding:32px 4px 30px;display:flex;flex-direction:column;
+        padding:32px 4px 30px;display:block;
       }
+      .svc-bottom{position:absolute;left:4px;right:4px;bottom:28px}
       .svc-card .num{
         font-family:var(--disp);font-size:.82rem;font-weight:700;color:#fff;
         width:34px;height:34px;flex:none;background:#FF4922;border-radius:50%;
         display:inline-flex;align-items:center;justify-content:center;line-height:1;
       }
       .svc-card h3{font-size:clamp(1.65rem,3.2vw,2.2rem);font-weight:600;color:#fff;margin-top:20px;letter-spacing:-.015em}
-      .svc-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:26px}
+      .svc-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
       .stag{font-size:.78rem;font-weight:500;color:#EDEDED;background:#292929;border-radius:100px;padding:8px 14px;white-space:nowrap;line-height:1}
-      .svc-card .desc{color:#9B9B9B;line-height:1.65;font-size:.97rem;margin-top:14px;max-width:580px}
+      .svc-card .desc{color:#9B9B9B;line-height:1.65;font-size:.97rem;margin-top:0;max-width:580px}
       @media (max-width:767px){
         .svc-card{top:140px;min-height:330px;padding:26px 2px 24px}
+        .svc-bottom{left:2px;right:2px;bottom:22px}
         .svc-card .num{width:32px;height:32px}
       }
 
@@ -843,31 +863,41 @@
             <p>From the first sketch to a live, fast product — one developer, no handoffs, no agency overhead.</p>
           </div>
 
+          <div class="svc-stack">
           <div class="svc-pinrow" aria-hidden="true"><span>Services</span><span class="cnt">(04)</span></div>
 
           <div class="svc-card" style="z-index:2">
             <span class="num">01</span>
             <h3>Web Development</h3>
+            <div class="svc-bottom">
             <div class="svc-tags"><span class="stag">React</span><span class="stag">Next.js</span><span class="stag">Node.js</span><span class="stag">MongoDB</span><span class="stag">REST APIs</span></div>
             <p class="desc">Building fast, responsive and scalable web applications with modern technologies.</p>
+            </div>
           </div>
           <div class="svc-card" style="z-index:3">
             <span class="num">02</span>
             <h3>Responsive Design</h3>
+            <div class="svc-bottom">
             <div class="svc-tags"><span class="stag">Mobile-first</span><span class="stag">CSS Grid</span><span class="stag">Flexbox</span><span class="stag">Tailwind CSS</span></div>
             <p class="desc">Crafting beautiful, mobile-first designs that deliver a seamless experience everywhere.</p>
+            </div>
           </div>
           <div class="svc-card" style="z-index:4">
             <span class="num">03</span>
             <h3>Performance &amp; SEO Optimization</h3>
+            <div class="svc-bottom">
             <div class="svc-tags"><span class="stag">Core Web Vitals</span><span class="stag">Caching</span><span class="stag">SEO</span><span class="stag">Image Optimization</span></div>
             <p class="desc">Improving speed, SEO and overall performance to ensure the best user experience.</p>
+            </div>
           </div>
           <div class="svc-card" style="z-index:5">
             <span class="num">04</span>
             <h3>Backend &amp; APIs</h3>
+            <div class="svc-bottom">
             <div class="svc-tags"><span class="stag">Node.js</span><span class="stag">Express</span><span class="stag">MongoDB</span><span class="stag">REST</span><span class="stag">Authentication</span></div>
             <p class="desc">Developing secure, reliable and scalable APIs and backend services.</p>
+            </div>
+          </div>
           </div>
         </div>
       </div>
