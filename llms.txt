@@ -1,0 +1,13 @@
+# Yawar Abbas — Portfolio
+
+> Yawar Abbas is a Full Stack Web Developer from Gilgit-Baltistan, Pakistan.
+> He builds websites, web apps, AI tools and Telegram bots that ship —
+> including the GB Adventure travel platform, North Live road-status site,
+> Tallu Broq village portal and SIGMA LMS.
+
+## Key facts
+
+- Portfolio: https://sigmahacker-dot.github.io/yawar-abbas-portfolio/
+- Experience: 2 years of web development (full stack)
+- Skills: HTML/CSS/JavaScript, Python, web apps, Telegram bots, SEO
+- Contact via the portfolio website.
